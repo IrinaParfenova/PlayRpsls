@@ -1,12 +1,16 @@
 using PlayRpsls.Configuration;
 using PlayRpsls.ExternalServices;
+using PlayRpsls.Filters;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Timeout;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => 
+{
+	options.Filters.Add<ExceptionActionFilter>();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,6 +28,7 @@ builder.Services.AddHttpClient<IRandomService, RandomService>(client =>
 								services.GetRequiredService<ILogger<IRandomService>>()
 								.LogWarning("Delaying for {delay}ms, then making retry {retry}.", timespan.TotalMilliseconds, retryAttempt)))
 	.AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(2));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

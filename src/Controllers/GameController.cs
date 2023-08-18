@@ -22,7 +22,14 @@ namespace PlayRpsls.Controllers
 		[Route("choices")]
 		public IActionResult GetChoices()
 		{
-			return Ok(GameChoices.Choices);
+			var choices = Enum.GetValues<Figure>()
+				.Select(t => new Choice
+				{
+					Id = t,
+					Name = t
+				});
+
+			return Ok(choices);
 		}
 
 		[HttpGet]
@@ -30,7 +37,14 @@ namespace PlayRpsls.Controllers
 		public async Task<IActionResult> GetRandomChoice()
 		{
 			var result = await _randomChoice.ExecuteAsync();
-			return Ok(GameChoices.Choices[result]);
+   
+			var choice = new Choice
+			{
+				Id = (Figure)result,
+				Name = (Figure)result
+			};
+			
+			return Ok(choice);
 		}
 
 		[HttpPost]

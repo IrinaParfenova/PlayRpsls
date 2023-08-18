@@ -23,7 +23,7 @@ namespace PlayRpsls.Tests
 		{
 			for (int i = 0; i <= 255; i ++)
 			{
-				_randomService.Setup(r => r.GetRandomNumber())
+				_randomService.Setup(r => r.GetRandomNumberAsync())
 				.ReturnsAsync(new RandomResult { Random = i });
 
 				var result = await _randomChoice.ExecuteAsync();

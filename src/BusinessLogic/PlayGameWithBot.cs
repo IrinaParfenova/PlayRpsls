@@ -30,15 +30,13 @@ namespace PlayRpsls.BusinessLogic
 					Bot = botFigure
 				};
 			}
-			else
+			
+			return new PlayResult
 			{
-				return new PlayResult
-				{
-					Results = GameResult.Lose,
-					Player = playerFigure,
-					Bot = botFigure
-				};
-			}
+				Results = GameResult.Lose,
+				Player = playerFigure,
+				Bot = botFigure
+			};
 		}
 	}
 }

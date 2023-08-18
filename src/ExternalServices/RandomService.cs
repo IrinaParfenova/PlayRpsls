@@ -1,4 +1,5 @@
 ﻿using PlayRpsls.Model;
+using PlayRpsls.Exceptions;
 
 namespace PlayRpsls.ExternalServices
 {

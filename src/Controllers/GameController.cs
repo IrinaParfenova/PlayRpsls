@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PlayRpsls.BusinessLogic;
-using PlayRpsls.Data;
+using PlayRpsls.Enums;
 using PlayRpsls.Model;
 using System.ComponentModel.DataAnnotations;
 

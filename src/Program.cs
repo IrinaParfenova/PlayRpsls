@@ -23,7 +23,8 @@ builder.Services.AddHttpClient<IRandomService, RandomService>(client =>
 						.HandleTransientHttpError()
 						.Or<TimeoutRejectedException>()
 						.OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
-						.WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromMilliseconds(100),
+						.WaitAndRetryAsync(Convert.ToInt32(builder.Configuration["RandomServiceRetryCount"]),
+							retryAttempt => TimeSpan.FromMilliseconds(100),
 							onRetry: (outcome, timespan, retryAttempt, context) => 
 								services.GetRequiredService<ILogger<IRandomService>>()
 								.LogWarning("Delaying for {delay}ms, then making retry {retry}.", timespan.TotalMilliseconds, retryAttempt)))

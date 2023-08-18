@@ -14,7 +14,7 @@ namespace PlayRpsls.BusinessLogic
 
 		public async Task<int> ExecuteAsync()
 		{
-			var randomInt = await _randomService.GetRandomNumber();
+			var randomInt = await _randomService.GetRandomNumberAsync();
 
 			var figuresCount = Enum.GetValues<Figure>().Length;
 

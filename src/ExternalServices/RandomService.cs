@@ -15,18 +15,25 @@ namespace PlayRpsls.ExternalServices
 
 		public async Task<RandomResult> GetRandomNumberAsync()
 		{
-			_logger.LogDebug("Calling external random service...");
-
-			var result = await _httpClient.GetFromJsonAsync<RandomResult>("/random");
-
-			if (result == null)
+			try
 			{
-				throw new Exception("Service olegbelousov.online did not return a value");
+				_logger.LogDebug("Calling external random service...");
+
+				var result = await _httpClient.GetFromJsonAsync<RandomResult>("/random");
+
+				if (result == null)
+				{
+					throw new RandomizerException("Service randomizer did not return a correct value");
+				}
+
+				_logger.LogDebug("Got the result from external random service");
+
+				return result;
 			}
-
-			_logger.LogDebug("Got the result from external random service");
-
-			return result;
+			catch
+			{
+				throw new RandomizerException("Service randomizer is unavailable. Try later.");
+			}
 		}
 	}
 }

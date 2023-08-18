@@ -13,7 +13,7 @@ namespace PlayRpsls.ExternalServices
 			_logger = logger;
 		}
 
-		public async Task<RandomResult> GetRandomNumber()
+		public async Task<RandomResult> GetRandomNumberAsync()
 		{
 			_logger.LogDebug("Calling external random service...");
 

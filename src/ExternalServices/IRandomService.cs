@@ -4,6 +4,6 @@ namespace PlayRpsls.ExternalServices
 {
 	public interface IRandomService
 	{
-		Task<RandomResult> GetRandomNumber();
+		Task<RandomResult> GetRandomNumberAsync();
 	}
 }
